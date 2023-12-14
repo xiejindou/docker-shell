@@ -7,11 +7,8 @@ function init(){
     # docker nginx installation documentation
     # Install the configuration file in the nginx folder of the current directory
 
-    docker pull ${image}
-    echo "The docker image was successfully pulled..."
-
     name=nginx-temp
-    docker run --name ${name} -d nginx
+    docker run --name ${name} -d ${image}
 
     mkdir -p ${NGINX_HOME}/cert
     mkdir -p ${NGINX_HOME}/logs
@@ -40,7 +37,6 @@ function start(){
     -v ${NGINX_HOME}/nginx.conf:/etc/nginx/nginx.conf \
     -v ${NGINX_HOME}/logs:/var/log/nginx \
     -v ${NGINX_HOME}/html:/usr/share/nginx/html \
-    -v /data/project:/mnt \
     --restart=unless-stopped \
     -d  ${image}
 }

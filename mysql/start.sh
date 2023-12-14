@@ -10,7 +10,6 @@ fi
 docker run --name ${name} \
 --restart=unless-stopped \
 -e MYSQL_ROOT_PASSWORD=your_password \
--v /etc/timezone:/etc/timezone:ro \
 -v /etc/localtime:/etc/localtime:ro \
 -v ${data}:/var/lib/mysql \
 -p 3306:3306 \

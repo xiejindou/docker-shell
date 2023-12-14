@@ -1,0 +1,1 @@
+> This git repository is a commonly used docker startup script. Each subdirectory is an application. `start.sh` in the application is the startup script, and `data` is the unified entry for the docker mapping host directory.

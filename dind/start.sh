@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIND_ROOT=$(cd "$(dirname "$0")";pwd)/data
-DIND_IMAGE=xiejindou/dind:debian.bookworm-slim
+DIND_IMAGE=xiejindou/dind:debian-bookworm
 DIND_NAME=dind
 
 function init(){

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 DIND_ROOT=$(cd "$(dirname "$0")";pwd)/data
-DIND_IMAGE=xiejindou/dind:debian-bookworm
+DIND_IMAGE=xiejindou/debian:bookworm-dindsys
 DIND_NAME=dind
 
-function init(){
+init(){
     name=dind-temp
     docker run --name ${name} -d ${DIND_IMAGE}
     docker cp ${name}:/ ${DIND_ROOT}/
@@ -13,7 +13,7 @@ function init(){
     docker rm ${name}
 }
 
-function start(){
+start(){
     if docker ps -a --format '{{.Names}}' | grep -q ${DIND_NAME}; then
         docker stop ${DIND_NAME} && docker rm ${DIND_NAME}
     fi
@@ -35,8 +35,15 @@ function start(){
     -v /etc/localtime:/etc/localtime:ro \
     --net host \
     -d ${DIND_IMAGE}
+    echo -e "${DIND_NAME} start completed. ✅ "
+}
 
-    echo -e "${DIND_NAME}启动完毕 ✅ "
+service_start(){
+    str="printf '#!/bin/sh -e\n\n\nexit 0' > /etc/rc.local && chmod +x /etc/rc.local"
+    str="$str && systemctl enable rc-local && systemctl start rc-local"
+    str="$str && systemctl enable docker && systemctl start docker"
+    docker exec ${DIND_NAME} /bin/bash -c "$str"
+    echo -e "rc-local and docker start completed. ✅ "
 }
 
 
@@ -44,6 +51,6 @@ if [ ! -e "./data/.dockerenv" ]; then
     init
 fi
 
-start
+start && sleep 2 && service_start
 
 #Then you can add alias `docker exec -it dind /bin/bash` on your ~/.bashrc to enter dind.

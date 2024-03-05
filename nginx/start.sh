@@ -3,7 +3,7 @@
 NGINX_HOME=$(cd "$(dirname "$0")";pwd)/data
 image=nginx:stable-alpine
 
-function init(){
+init(){
     # docker nginx installation documentation
     # Install the configuration file in the nginx folder of the current directory
 
@@ -24,7 +24,7 @@ function init(){
     echo "Docker initialization nginx is completed!"
 }
 
-function start(){
+start(){
     name=nginx
     if docker ps -a --format '{{.Names}}' | grep -q ${name}; then
         docker stop ${name} && docker rm ${name}

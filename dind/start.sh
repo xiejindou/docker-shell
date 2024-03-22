@@ -24,10 +24,13 @@ start(){
     -v ${DIND_ROOT}/data:/data \
     -v ${DIND_ROOT}/etc:/etc \
     -v ${DIND_ROOT}/home:/home \
+    -v ${DIND_ROOT}/lib:/lib \
+    -v ${DIND_ROOT}/lib64:/lib64 \
     -v ${DIND_ROOT}/media:/media \
     -v ${DIND_ROOT}/mnt:/mnt \
     -v ${DIND_ROOT}/opt:/opt \
     -v ${DIND_ROOT}/root:/root \
+    -v ${DIND_ROOT}/sbin:/sbin \
     -v ${DIND_ROOT}/srv:/srv \
     -v ${DIND_ROOT}/tmp:/tmp \
     -v ${DIND_ROOT}/usr:/usr \

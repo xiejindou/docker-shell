@@ -35,6 +35,7 @@ start(){
     -v ${DIND_ROOT}/tmp:/tmp \
     -v ${DIND_ROOT}/usr:/usr \
     -v ${DIND_ROOT}/var:/var \
+    -v ${DIND_ROOT}/var/lib/docker:/var/lib/docker \
     -v /etc/localtime:/etc/localtime:ro \
     --net host \
     -d ${DIND_IMAGE}
@@ -57,3 +58,4 @@ fi
 start && sleep 2 && service_start
 
 #Then you can add alias `docker exec -it dind /bin/bash` on your ~/.bashrc to enter dind.
+#It's very important about that: -v ${DIND_ROOT}/var/lib/docker:/var/lib/docker,This directory is where the docker data is stored. If you don't mount it separately, the docker image will disappear when you re-execute this script again.
